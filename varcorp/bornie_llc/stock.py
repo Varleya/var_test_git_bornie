@@ -3,18 +3,20 @@ import datetime
 from datetime import timedelta
 import pickle
 from utils import *
+#from googlestock import GoogleIntraDay
+from yahoostock import YahooDividend
+
 
 class Stock(object):
     """stock module has dividend sub classes but also holds price tick data for itself"""
-    def __init__(self, ticker, *args):
+    def __init__(self, ticker, **args):
         super(Stock, self).__init__()
         self.ticker = ticker
-        self.start_date = None
-        self.end_date = None
-        self.tick_data = {}
-        self.div_data = {}
-        self.div_dates = []
-        self.qurl = "http://ichart.yahoo.com/table.csv?s=" + self.ticker
+        self.start_date = args.get('start_date')
+        self.end_date = args.get('end_date')
+        #self.tick_data = GoogleIntraDay()
+        self.dividends = YahooDividend(ticker, start_date=self.start_date, end_date=self.end_date).grab_data()
+        self.qurl = "http://ichart.yahoo.com/table.csv?s=" + ticker
 
     def grab(self, url):
         # actual internet piece that will later look at dB for existence

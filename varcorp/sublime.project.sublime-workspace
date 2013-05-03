@@ -1,0 +1,470 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"market",
+				"market_yields"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "bornie_llc/googstock.py",
+			"settings":
+			{
+				"buffer_size": 3748,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bornie_llc/market.py",
+			"settings":
+			{
+				"buffer_size": 1402,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "bornie_llc/runner.py",
+			"settings":
+			{
+				"buffer_size": 1600,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "bornie_llc/stock.py",
+			"settings":
+			{
+				"buffer_size": 4120,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "bornie_llc/utils.py",
+			"settings":
+			{
+				"buffer_size": 1017,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "bornie_llc/yahoostock.py",
+			"settings":
+			{
+				"buffer_size": 1049,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Z/varcorp/bornie_llc/googstock.py",
+		"/Z/varcorp/bornie_llc/market.py",
+		"/Z/y.py",
+		"/Z/provider_scripts/sfdc/base/Lead/1.py",
+		"/Z/provider_scripts/sendouts/base/Opportunity/1.py",
+		"/Z/varcorp/bornie_llc/stock.py",
+		"/Z/varcorp/bornie_llc/runner.py",
+		"/Z/varcorp/bornie_llc/utils.py",
+		"/Z/provider_scripts/sfdc/base/Opportunity/4.py",
+		"/Z/is_engine/bbase/utils/option_docs2.py",
+		"/Z/is_engine/bbase/main/option_docs2.py",
+		"/Z/is_engine/bbase/utils/option_docs.py",
+		"/C/Users/Varley/Dropbox/Rando/wiki/navigate_bh.mht",
+		"/Z/is_engine/bbase/utils/property_object.py",
+		"/C/Users/Varley/Downloads/ultraFinance-0.0.2/setup.py",
+		"/Z/varcorp/grab_date.py",
+		"/Z/varcorp/runner.py",
+		"/C/Users/Varley/Downloads/find.py",
+		"/C/Users/Varley/Downloads/akken.py",
+		"/Z/provider_scripts/sfdc/base/Activity/8.py",
+		"/C/Users/Varley/Desktop/.vim/plugin/command-t.vim",
+		"/Z/work/grab/sfdc/DBISoft/warehouse/client.spec",
+		"/Z/provider_scripts/sfdc/base/Activity/.8.py.swp",
+		"/C/Users/Varley/Downloads/minibufexpl.vim",
+		"/C/Users/Varley/Dropbox/Rando/who_dat_variable.py",
+		"/C/Users/Varley/Dropbox/Rando/is2_opp_deal_dates",
+		"/C/Users/Varley/Downloads/highlight (1).vim",
+		"/C/Users/Varley/Dropbox/Rando/robertcontperm.py",
+		"/Z/provider_scripts/bullhorn/base/Deal/7.py",
+		"/C/Users/Varley/Downloads/pythoncomplete.vim",
+		"/Z/provider_scripts/bullhorn/base/Opportunity/9.py",
+		"/Z/SpongCell/client.spec"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"start",
+			"parse_head",
+			"data",
+			"grab_data",
+			"start_date",
+			" set_value_rule and search_fields_for_regex(self.joborder, set_value_ru",
+			"add_rule_usage_from_file",
+			"add_rule_usage_from_file_db",
+			"add_rule_usage_db",
+			"add_rule_usage",
+			"add_rule_usage_from_file",
+			"option_doc",
+			"option_docs2",
+			"xml_param",
+			"get_rule_from_rules",
+			"\n        # i guess this doesn't need to be rewritten....\n        rule = get_rule_from_rules(rule_path, rules)\n        raise Exception, rule\n",
+			"get_rule_from_rules",
+			"get_rules_and_errors",
+			"get_rule_from_rules",
+			"rootfiter",
+			"get_rule_from_rules",
+			"add_rule_usage_from_file_db",
+			"add_rule_usage_db",
+			"get_rules_and_errors",
+			"option_docs",
+			"index",
+			"import debu",
+			"import debug",
+			"import",
+			"add_rule",
+			"add_rule_usage_from_file_db",
+			"add_rulage_usage_from_file_db",
+			"add_rule_usage_db",
+			"add_rule_usage_from_file_db",
+			"add_rule_usage_from_file",
+			"add_rule_usage",
+			"get_rules_and",
+			"AWV",
+			"get_rule_from_rules",
+			"AWV",
+			"end_date",
+			"start",
+			"get_data",
+			"debug",
+			"db2",
+			"Db2",
+			"for",
+			"DB2 for",
+			"Opportunity:",
+			"open",
+			"con",
+			"contract_length",
+			"flight"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "bornie_llc/googstock.py",
+					"settings":
+					{
+						"buffer_size": 3748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2362,
+								2362
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "bornie_llc/market.py",
+					"settings":
+					{
+						"buffer_size": 1402,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10,
+								10
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "bornie_llc/runner.py",
+					"settings":
+					{
+						"buffer_size": 1600,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								930,
+								930
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "bornie_llc/stock.py",
+					"settings":
+					{
+						"buffer_size": 4120,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1469,
+								1469
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "bornie_llc/utils.py",
+					"settings":
+					{
+						"buffer_size": 1017,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								836,
+								836
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "bornie_llc/yahoostock.py",
+					"settings":
+					{
+						"buffer_size": 1049,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1049,
+								1049
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.5,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 25.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"bulldeal.py",
+				"provider_scripts/bullhorn/base/Deal/7.py"
+			],
+			[
+				"bullopportun",
+				"provider_scripts/bullhorn/base/Opportunity/9.py"
+			],
+			[
+				"",
+				"Adknow/Account.sql"
+			],
+			[
+				"spongcellclient",
+				"SpongCell/client.spec"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 135.0,
+	"status_bar_visible": true
+}
