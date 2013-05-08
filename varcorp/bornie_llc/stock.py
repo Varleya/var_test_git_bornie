@@ -3,7 +3,7 @@ import datetime
 from datetime import timedelta
 import pickle
 from utils import *
-#from googlestock import GoogleIntraDay
+from googstock import GoogleIntradayQuote
 from yahoostock import YahooDividend
 
 
@@ -16,20 +16,13 @@ class Stock(object):
         self.end_date = args.get('end_date')
         #self.tick_data = GoogleIntraDay()
         self.dividends = YahooDividend(ticker, start_date=self.start_date, end_date=self.end_date).grab_data()
+        num_days = (self.end_date-self.start_date).days
+        self.tdata = GoogleIntradayQuote(ticker, num_days=num_days).write_csv('GE_ticker.csv')
         self.qurl = "http://ichart.yahoo.com/table.csv?s=" + ticker
 
-    def grab(self, url):
-        # actual internet piece that will later look at dB for existence
-        try:
-            pdata = urllib2.urlopen(url)
-            rows = pdata.readlines()
-            pdata.close()
-            keys = parse_header(rows[0])
-            return keys, rows
-        except:
-            print url
-            return [],[]
-        
+
+
+
     def get_data(self, url):
         nodata = True
         urlkey = ""

@@ -5,13 +5,12 @@ import pickle
 
 def parse_header(line):
     # parse single line by delimter
-    row = []
-    cells = line.split(',')
-    for cell in cells:
+    rows = []
+    for cell in line:
         # get rid of new line
-        cell = cell.strip()
-        row.append(cell)
-    return row
+        row= cell.split(',')
+        rows.append(cell)
+    return rows
 
 def parse_single_entry(line):
     # parse single line by delimter
