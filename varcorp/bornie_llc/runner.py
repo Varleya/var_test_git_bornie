@@ -5,11 +5,11 @@ from market import Market
 
 
 tv = 0.0
-start_date = datetime.date(2012,1,1)
+start_date = datetime.date(2000,1,1)
 # think about coding this as a relative delta
 # end_date = datetime.date(2012,1,10)
-end_date = datetime.datetime.today()
-end_date = datetime.date(2012,12,31)
+
+end_date = datetime.date(2013,5,1)
 print start_date, " to ", end_date
 
 #single_stock = raw_input("Input stock? ")
