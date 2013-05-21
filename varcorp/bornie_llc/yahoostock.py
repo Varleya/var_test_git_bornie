@@ -1,5 +1,6 @@
 
 import urllib2
+from urllib import urlencode
 from utils import *
 import MySQLdb
 import csv
@@ -24,12 +25,15 @@ class YahooDividend(object):
         
         #check if table exists
         cursor = db.cursor()
+        create_table = "CREATE TABLE {0}_dividends (divdate DATE not NULL, amount FLOAT(6,6))".format(self.ticker)
+
         try:
             cursor.execute("select * from {0}_dividends limit 1".format(self.ticker))
+            cursor.execute("drop table {0}_dividends".format(self.ticker))
         except:
-            create_table = "CREATE TABLE {0}_dividends (divdate DATE not NULL, amount FLOAT(6,6))".format(self.ticker)
-            cursor.execute(create_table)
-
+            print "first time"
+            pass
+        cursor.execute(create_table)
         # insert existing CSV into SQL
         insert_sql = """
         LOAD DATA LOCAL INFILE '{0}_dividends.csv' 
@@ -65,4 +69,3 @@ class YahooDividend(object):
         self.save_data(rows[1:])
         # first row comes back with header, so to store just return everything after that
         pdata.close()
-    

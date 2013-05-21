@@ -18,6 +18,6 @@ class Stock(object):
         self.dividends = YahooDividend(ticker, start_date=self.start_date, end_date=self.end_date).grab_data()
         num_days = (self.end_date-self.start_date).days
         self.tdata = GoogleQuote(ticker, start_date=self.start_date, end_date=self.end_date)
-        self.tdata.write_csv('GE_ticker.csv')
-        self.tdata.write_csv_to_db('GE_ticker.csv', ticker)
+        self.tdata.write_csv(('%s_ticker.csv') % ticker)
+        self.tdata.write_csv_to_db(('%s_ticker.csv') % ticker, ticker)
         

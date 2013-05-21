@@ -67,11 +67,13 @@ class IntraQuote(object):
     
     #check if table exists
     cursor = db.cursor()
+    create_table = "CREATE TABLE {0}_ticker (symbol TEXT, tickdate DATE not NULL, ticktime TIME, open FLOAT, high FLOAT, low FLOAT, close FLOAT, volume FLOAT)".format(ticker)
     try:
         cursor.execute("select * from {0}_ticker limit 1".format(ticker))
+        cursor.execute("drop table {0}_ticker".format(self.ticker))
     except:
-        create_table = "CREATE TABLE {0}_ticker (symbol TEXT, tickdate DATE not NULL, ticktime TIME, open FLOAT, high FLOAT, low FLOAT, close FLOAT, volume FLOAT)".format(ticker)
-        cursor.execute(create_table)
+        pass
+    cursor.execute(create_table)
 
     # insert existing CSV into SQL
     insert_sql = """
@@ -196,6 +198,7 @@ class GoogleQuote(Quote):
     url_string = "http://www.google.com/finance/historical?q={0}".format(self.symbol)
     url_string += "&startdate={0}&enddate={1}&output=csv".format(
                       start.strftime('%b %d, %Y'),end.strftime('%b %d, %Y'))
+    print url_string
     csv = urllib.urlopen(url_string).readlines()
     csv.reverse()
     for bar in xrange(0,len(csv)-1):
