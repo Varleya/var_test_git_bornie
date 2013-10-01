@@ -53,8 +53,8 @@ def validbuydate(date, buy_delta, data):
 
 if __name__ == '__main__':
 	# will want this to be filled with options
-    port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC']
-    
+#    port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC']
+    port = ['AIG','FDUS','FDUS','FISI','GARS','GCAP','GK','LMOS','MCY','MDU','MPW','MRVL','SFL']    
     db = MySQLdb.connect(host="localhost",
                          user="root",
                          passwd="",
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     cursor = db.cursor()
     cursor.execute("use varcorp")
     
-    div_query = "select divdate, amount from %s_dividends where year(divdate) = '2013'"
+    div_query = "select divdate, amount from %s_dividends where year(divdate) = '2013' or year(divdate)='2012'"
     tick_query = "select * from %s_ticker"
     market_query = "select * from %s_ticker"
     
@@ -72,14 +72,16 @@ if __name__ == '__main__':
     buy_time = 'close'
     sell_time = 'open'
     dumsum = 0
-    cursor.execute(market_query)
-    market = dicttick(cursor)
+    # cursor.execute(market_query)
+    # market = dicttick(cursor)
+#    over_time = 0.0
+    print "symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield"
     for symbol in port:
+        over_time = 0.0
         cursor.execute((div_query % symbol))
         divs = dictdividends(cursor)
         cursor.execute((tick_query % symbol))
         ticks = dicttick(cursor)
-        import debug 
         for date, amount in sorted(divs.iteritems()):
             buy_date = validbuydate(date, buy_delta, ticks)
             if not buy_date:
@@ -90,9 +92,9 @@ if __name__ == '__main__':
             price_yield = sell_price / buy_price - 1
             div_yield = amount / buy_price
             
-            dow_yield = dow.get(buy_date)[buy_time] / dow.get(date+sell_delta)[sell_time]
-
+            # dow_yield = dow.get(buy_date)[buy_time] / dow.get(date+sell_delta)[sell_time]
 
             total_yield = price_yield + div_yield
-            print ",".join(str(d) for d in [symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield, dow_yield])
-
+            over_time += total_yield
+            print ",".join(str(d) for d in [symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield])
+        print symbol, " had ", over_time
