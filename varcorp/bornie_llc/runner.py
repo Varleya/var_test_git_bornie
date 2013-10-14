@@ -4,11 +4,11 @@ from stock import Stock
 from market import Market
 
 tv = 0.0
-start_date = datetime.date(2000,1,1)
+start_date = datetime.date(2006,1,1)
 # think about coding this as a relative delta
 # end_date = datetime.date(2012,1,10)
 
-end_date = datetime.date(2013,9,1)
+end_date = datetime.date(2013,10,1)
 print start_date, " to ", end_date
 
 single_stock = raw_input("Input stock? ")
@@ -16,8 +16,9 @@ single_stock = raw_input("Input stock? ")
 if single_stock:
     dow = [single_stock]
 else:
-    dow = ['AIG','FDUS','FDUS','FISI','GARS','GCAP','GK','LMOS','MCY','MDU','MPW','MRVL','SFL']
-    #dow = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC', 'SPY']
+    dow = ['TK', 'GPS', 'STEI']
+    #dow = ['AIG','FDUS','FDUS','FISI','GARS','GCAP','GK','LMOS','MCY','MDU','MPW','MRVL','SFL']
+ #   dow = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC', 'SPY']
 
 
 #hard coded test stock 

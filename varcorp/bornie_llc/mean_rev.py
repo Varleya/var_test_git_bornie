@@ -56,8 +56,8 @@ def validbuydate(date, buy_delta, data):
 
 if __name__ == '__main__':
 	# will want this to be filled with options
-    # port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC']
-    port = ['GPS', 'TK', 'STEI']    
+    port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC','SPY']
+    #port = ['GPS', 'TK', 'STEI']    
     db = MySQLdb.connect(host="localhost",
                          user="root",
                          passwd="",
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     cursor.execute("use varcorp")
     
     div_query = "select divdate, amount from %s_dividends where year(divdate) = '2013' or year(divdate)='2012'"
-    tick_query = "select * from %s_ticker"
+    tick_query = "select * from %s_ticker where year(tickdate) = '2008' or year(tickdate)='2007' or  year(tickdate)='2009'"
     market_query = "select * from SPY_ticker"
     
     # parameters to pass in as options
@@ -81,35 +81,41 @@ if __name__ == '__main__':
     market = dicttick(cursor)
     market_dumsum = 0.0 
 
+
+    openp = 3
+    closep = 6
+    low = 5 
+    
     print "symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield"
     for symbol in port:
         market_time = 0.0 
         over_time = 0.0
-        cursor.execute((div_query % symbol))
-        divs = dictdividends(cursor)
+        
         cursor.execute((tick_query % symbol))
-        ticks = dicttick(cursor)
-        for date, amount in sorted(divs.iteritems()):
-            buy_date = validbuydate(date, buy_delta, ticks)
-            if not buy_date:
-                print "can't get data for %s on %s" % (symbol, date)
-                continue
-            buy_price = ticks.get(buy_date)[buy_time]
-            sell_price = ticks.get(date+sell_delta)[sell_time]
-            price_yield = sell_price / buy_price - 1
-            div_yield = amount / buy_price
-            try: 
-                market_buy = market.get(buy_date)[buy_time]
-                market_sell = market.get(date+sell_delta)[sell_time]
-                market_yield = market_sell/market_buy - 1
-                market_time += market_yield            
-            except:
-                print "###: error"
-                market_yield = 0.0
+        headers =  map(lambda x: x[0], cursor.description)
+       # ticks = dicttick(cursor)
+        
+        totals = 0.0
+        buy_price = None
+        buys = 0 
+        for data in sorted(cursor.fetchall()):
+            # if bought, figure out won/loss
+            price_change = data[closep]-data[openp]
+            if buy_price:
+                realized_1day = data[closep] / buy_price - 1
+                totals += realized_1day
 
-            total_yield = price_yield + div_yield
-            over_time += total_yield
-            dumsum += total_yield
-            print ",".join(str(d) for d in [symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield, market_yield])
-        print symbol, " had ", over_time, ' compared to ', market_time
-    print dumsum, market_time
+            
+            #stock went up in a day
+            if price_change > 0:
+                buy_price = None
+                pass
+            else:
+                buys += 1
+                buy_price = data[closep]
+        if symbol != 'SPY':
+            dumsum += totals
+
+        print ",".join(str(d) for d in [symbol, totals,buys])
+    print dumsum
+    #print ",".join(str(d) for d in [symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield, market_yield])

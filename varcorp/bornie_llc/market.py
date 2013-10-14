@@ -3,7 +3,6 @@ import urllib2
 
 class Market(object):
 
-
     def grab_stock_data(self, symbol="%SEDJI"):
         start_date = "01-01-2000"
         end = "05-21-2013"
@@ -11,5 +10,3 @@ class Market(object):
     
         mdata = urllib2.urlopen(url)
         rows = mdata.readlines()
-        
-

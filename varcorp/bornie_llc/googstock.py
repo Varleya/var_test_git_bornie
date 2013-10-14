@@ -58,6 +58,7 @@ class IntraQuote(object):
       dt = datetime.datetime.strptime(ds+' '+ts,self.DATE_FMT+' '+self.TIME_FMT)
       self.append(dt,open_,high,low,close,volume)
     return True
+
   def write_csv_to_db(self, filename, ticker):
     #what i'm about to do is sad...need ticker though
     db = MySQLdb.connect(host="localhost",
@@ -70,6 +71,7 @@ class IntraQuote(object):
     create_table = "CREATE TABLE {0}_ticker (symbol TEXT, tickdate DATE not NULL, ticktime TIME, open FLOAT, high FLOAT, low FLOAT, close FLOAT, volume FLOAT)".format(ticker)
     try:
         cursor.execute("select * from {0}_ticker limit 1".format(ticker))
+        print "table found, dropping"
         cursor.execute("drop table {0}_ticker".format(self.ticker))
     except:
         pass
@@ -160,11 +162,15 @@ class Quote(object):
     
     #check if table exists
     cursor = db.cursor()
+    create_table = "CREATE TABLE {0}_ticker (symbol TEXT, tickdate DATE not NULL, ticktime TIME, open FLOAT, high FLOAT, low FLOAT, close FLOAT, volume FLOAT)".format(ticker)
+    
     try:
         cursor.execute("select * from {0}_ticker limit 1".format(ticker))
+        print "table found, dropping"
+        cursor.execute("drop table {0}_ticker".format(ticker))
     except:
-        create_table = "CREATE TABLE {0}_ticker (symbol TEXT, tickdate DATE not NULL, ticktime TIME, open FLOAT, high FLOAT, low FLOAT, close FLOAT, volume FLOAT)".format(ticker)
-        cursor.execute(create_table)
+        pass
+    cursor.execute(create_table)
 
     # insert existing CSV into SQL
     insert_sql = """
@@ -177,6 +183,32 @@ class Quote(object):
     cursor.execute(insert_sql)
     db.commit()
     db.close()
+  # def write_csv_to_db(self, filename, ticker):
+  #   #what i'm about to do is sad...need ticker though
+  #   db = MySQLdb.connect(host="localhost",
+  #                        user="root",
+  #                        passwd="",
+  #                        db="varcorp")
+  #   
+  #   #check if table exists
+  #   cursor = db.cursor()
+  #   try:
+  #       cursor.execute("select * from {0}_ticker limit 1".format(ticker))
+  #   except:
+  #       create_table = "CREATE TABLE {0}_ticker (symbol TEXT, tickdate DATE not NULL, ticktime TIME, open FLOAT, high FLOAT, low FLOAT, close FLOAT, volume FLOAT)".format(ticker)
+  #       cursor.execute(create_table)
+
+  #   # insert existing CSV into SQL
+  #   insert_sql = """
+  #   LOAD DATA LOCAL INFILE '{0}_ticker.csv' 
+  #   INTO TABLE {0}_ticker FIELDS TERMINATED BY ',' 
+  #   IGNORE 1 LINES;
+  #   """.format(ticker)
+
+  #   # enter data and commit to DB
+  #   cursor.execute(insert_sql)
+  #   db.commit()
+  #   db.close()
 
   def __repr__(self):
     return self.to_csv()
