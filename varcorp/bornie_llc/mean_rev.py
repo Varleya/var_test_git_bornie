@@ -55,9 +55,15 @@ def validbuydate(date, buy_delta, data):
 
 
 if __name__ == '__main__':
-	# will want this to be filled with options
-    port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC','SPY']
-    #port = ['GPS', 'TK', 'STEI']    
+    single_stock = raw_input("Input stock? ")
+    if single_stock:
+        
+        port = [single_stock]
+    else:
+        # will want this to be filled with options
+        #port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC','SPY']
+        #port = ['GPS', 'TK', 'STEI']    
+        port = ['SPY']
     db = MySQLdb.connect(host="localhost",
                          user="root",
                          passwd="",
@@ -66,7 +72,8 @@ if __name__ == '__main__':
     cursor.execute("use varcorp")
     
     div_query = "select divdate, amount from %s_dividends where year(divdate) = '2013' or year(divdate)='2012'"
-    tick_query = "select * from %s_ticker where year(tickdate) = '2008' or year(tickdate)='2007' or  year(tickdate)='2009'"
+    #tick_query = "select * from %s_ticker where year(tickdate) = '2008' or year(tickdate)='2007' or  year(tickdate)='2009'"
+    tick_query = "select * from %s_ticker"
     market_query = "select * from SPY_ticker"
     
     # parameters to pass in as options
@@ -85,8 +92,10 @@ if __name__ == '__main__':
     openp = 3
     closep = 6
     low = 5 
-    
+    high = 4 
     print "symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield"
+    total_buys = 0.0
+    
     for symbol in port:
         market_time = 0.0 
         over_time = 0.0
@@ -94,28 +103,30 @@ if __name__ == '__main__':
         cursor.execute((tick_query % symbol))
         headers =  map(lambda x: x[0], cursor.description)
        # ticks = dicttick(cursor)
-        
+
         totals = 0.0
         buy_price = None
-        buys = 0 
+        buys = 0.0
         for data in sorted(cursor.fetchall()):
             # if bought, figure out won/loss
             price_change = data[closep]-data[openp]
+            #price_change = data[closep]/data[openp]-1
             if buy_price:
-                realized_1day = data[closep] / buy_price - 1
+                realized_1day = data[openp] / buy_price - 1
                 totals += realized_1day
 
-            
             #stock went up in a day
             if price_change > 0:
                 buy_price = None
                 pass
             else:
                 buys += 1
+                total_buys += 1
                 buy_price = data[closep]
+
         if symbol != 'SPY':
             dumsum += totals
 
         print ",".join(str(d) for d in [symbol, totals,buys])
-    print dumsum
+    print dumsum, total_buys
     #print ",".join(str(d) for d in [symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield, market_yield])

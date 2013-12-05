@@ -81,7 +81,7 @@ class IntraQuote(object):
     insert_sql = """
     LOAD DATA LOCAL INFILE '{0}_ticker.csv' 
     INTO TABLE {0}_ticker FIELDS TERMINATED BY ',' 
-    IGNORE 1 LINES;
+    IGNORE 0 LINES;
     """.format(ticker)
 
     # enter data and commit to DB
@@ -176,7 +176,7 @@ class Quote(object):
     insert_sql = """
     LOAD DATA LOCAL INFILE '{0}_ticker.csv' 
     INTO TABLE {0}_ticker FIELDS TERMINATED BY ',' 
-    IGNORE 1 LINES;
+    IGNORE 0 LINES;
     """.format(ticker)
 
     # enter data and commit to DB

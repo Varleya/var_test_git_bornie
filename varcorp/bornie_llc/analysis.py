@@ -51,13 +51,11 @@ def validbuydate(date, buy_delta, data):
     return None
 
 
-
-
-
 if __name__ == '__main__':
 	# will want this to be filled with options
-    # port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC']
-    port = ['GPS', 'TK', 'STEI']    
+    port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC']
+    #port = ['GPS', 'TK', 'STEI']    
+    #port = ['T', 'VZ', 'INTC', 'MRK', 'MCD', 'CVX', 'MSFT', 'PFE', 'PG', 'DD']
     db = MySQLdb.connect(host="localhost",
                          user="root",
                          passwd="",
@@ -95,7 +93,12 @@ if __name__ == '__main__':
                 print "can't get data for %s on %s" % (symbol, date)
                 continue
             buy_price = ticks.get(buy_date)[buy_time]
-            sell_price = ticks.get(date+sell_delta)[sell_time]
+            
+            # more clever selling logic
+            if ticks.get(date+sell_delta)['open'] / buy_price - 1 > 0.0:
+                sell_price = ticks.get(date+sell_delta)['high']
+            else:
+                sell_price = ticks.get(date+sell_delta)[sell_time]
             price_yield = sell_price / buy_price - 1
             div_yield = amount / buy_price
             try: 
