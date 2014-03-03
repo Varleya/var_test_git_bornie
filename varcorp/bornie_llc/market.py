@@ -10,3 +10,4 @@ class Market(object):
     
         mdata = urllib2.urlopen(url)
         rows = mdata.readlines()
+        print rows

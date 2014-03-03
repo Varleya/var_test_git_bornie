@@ -2,6 +2,7 @@ import urllib
 import MySQLdb
 import csv
 from datetime import timedelta
+from runner import Runner
 def dictdividends(cursor):
     "Returns all rows from a cursor as a dict"
     desc = cursor.description
@@ -53,8 +54,10 @@ def validbuydate(date, buy_delta, data):
 
 if __name__ == '__main__':
 	# will want this to be filled with options
-    port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','HPQ','BAC']
-    #port = ['GPS', 'TK', 'STEI']    
+    port = ['ADM','CCL', 'PPG', 'SPY']
+    run = Runner(port)
+    #port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','BAC']
+    #port = ['PG']
     #port = ['T', 'VZ', 'INTC', 'MRK', 'MCD', 'CVX', 'MSFT', 'PFE', 'PG', 'DD']
     db = MySQLdb.connect(host="localhost",
                          user="root",
@@ -63,7 +66,7 @@ if __name__ == '__main__':
     cursor = db.cursor()
     cursor.execute("use varcorp")
     
-    div_query = "select divdate, amount from %s_dividends where year(divdate) = '2013' or year(divdate)='2012'"
+    div_query = "select divdate, amount from %s_dividends where year(divdate) = '2014' or year(divdate)='2014'"
     tick_query = "select * from %s_ticker"
     market_query = "select * from SPY_ticker"
     
@@ -79,7 +82,6 @@ if __name__ == '__main__':
     market = dicttick(cursor)
     market_dumsum = 0.0 
 
-    print "symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield"
     for symbol in port:
         market_time = 0.0 
         over_time = 0.0
@@ -113,6 +115,14 @@ if __name__ == '__main__':
             total_yield = price_yield + div_yield
             over_time += total_yield
             dumsum += total_yield
-            print ",".join(str(d) for d in [symbol, date, buy_price, sell_price, amount, price_yield, div_yield, total_yield, market_yield])
+            
+            price_yield = round(price_yield, 5)
+            div_yield = round(div_yield, 5)
+            total_yield = round(total_yield, 5)
+            market_yield = round(market_yield, 5)
+            market_dumsum += market_yield
+
+            print u"{:<5} | {:<15} | {:<6} | {:<6} | {:<6} | {:<6} | {:<6} | {:<6} | {:<6} |".format(symbol, unicode(date), buy_price, sell_price, amount, price_yield, div_yield, total_yield, market_yield)
+
         print symbol, " had ", over_time, ' compared to ', market_time
-    print dumsum, market_time
+    print dumsum, market_dumsum
