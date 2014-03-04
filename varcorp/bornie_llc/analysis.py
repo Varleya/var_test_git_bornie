@@ -55,10 +55,9 @@ def validbuydate(date, buy_delta, data):
 if __name__ == '__main__':
 	# will want this to be filled with options
     port = ['ADM','CCL', 'PPG', 'SPY']
-    run = Runner(port)
-    #port = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','BAC']
-    #port = ['PG']
-    #port = ['T', 'VZ', 'INTC', 'MRK', 'MCD', 'CVX', 'MSFT', 'PFE', 'PG', 'DD']
+    port = ['UNP','GS','MFC','MHFI','HON','NVDA','GXP','MGEE','FINL','MCD','NKE','LMT','SU','OMC','MSFT','JNJ','GE','UPS','PRU','CCL','TRI','ADM','PPG','QCOM','HAL','K','MOS','SPY']
+    #run = Runner(port)
+    #dow = ['MRK','DIS','WMT','TRV','KO','HD','MCD','JNJ','MMM','CVX','UTX','MSFT','DD','IBM','PFE','BA','XOM','INTC','AA','CAT','PG','VZ','T','AXP','JPM','CSCO','GE','BAC']
     db = MySQLdb.connect(host="localhost",
                          user="root",
                          passwd="",
@@ -81,6 +80,8 @@ if __name__ == '__main__':
     cursor.execute(market_query)
     market = dicttick(cursor)
     market_dumsum = 0.0 
+    headers = ['Tick', 'Date', 'BuyPrice','SellPrice','DivAmt', 'PriceYield', 'DivYeield',' TotalYield','MarketYield']
+    print u"{:<5} | {:<15} | {:<9} | {:<9} | {:<9} | {:<9} | {:<9} | {:<9} | {:<9} |".format(*headers)
 
     for symbol in port:
         market_time = 0.0 
@@ -122,7 +123,7 @@ if __name__ == '__main__':
             market_yield = round(market_yield, 5)
             market_dumsum += market_yield
 
-            print u"{:<5} | {:<15} | {:<6} | {:<6} | {:<6} | {:<6} | {:<6} | {:<6} | {:<6} |".format(symbol, unicode(date), buy_price, sell_price, amount, price_yield, div_yield, total_yield, market_yield)
+            print u"{:<5} | {:<15} | {:<9} | {:<9} | {:<9} | {:<9} | {:<9} | {:<9} | {:<9} |".format(symbol, unicode(date), buy_price, sell_price, amount, price_yield, div_yield, total_yield, market_yield)
 
-        print symbol, " had ", over_time, ' compared to ', market_time
+        #print symbol, " had ", over_time, ' compared to ', market_time
     print dumsum, market_dumsum

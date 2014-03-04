@@ -14,6 +14,7 @@ class Runner(object):
 # end_date = datetime.date(2012,1,10)
 
         end_date = datetime.date(2014,2,18)
+        end_date = datetime.date.today()
         #print start_date, " to ", end_date
 
         #single_stock = raw_input("Input stock? ")
